@@ -5,15 +5,15 @@ require_once __DIR__.'/../src/whatsprot.class.php';
 require_once __DIR__.'/../src//events/MyEvents.php';
 
 //Change to your time zone
-date_default_timezone_set('America/Mexico_City');
+date_default_timezone_set('Europe/Madrid');
 
 //######### DO NOT COMMIT THIS FILE WITH YOUR CREDENTIALS ###########
 ///////////////////////CONFIGURATION///////////////////////
 //////////////////////////////////////////////////////////
-$username = '5215525611806';                      // Telephone number including the country code without '+' or '00'.
-$password = '6R44JvLvgPyoSNJlHHS64edv1Z4=';     // Use registerTool.php or exampleRegister.php to obtain your password
-$nickname = 'Web Frank';                          // This is the username (or nickname) displayed by WhatsApp clients.
-$target = "5215543519524";                   // Destination telephone number including the country code without '+' or '00'.
+$username = '**your phone number**';                      // Telephone number including the country code without '+' or '00'.
+$password = '**server generated whatsapp password**';     // Use registerTool.php or exampleRegister.php to obtain your password
+$nickname = '**your nickname**';                          // This is the username (or nickname) displayed by WhatsApp clients.
+$target = "**contact's phone number**";                   // Destination telephone number including the country code without '+' or '00'.
 $debug = false;                                           // Set this to true, to see debug mode.
 ///////////////////////////////////////////////////////////
 
@@ -81,13 +81,10 @@ $w->eventManager()->bind('onPresenceUnavailable', 'onPresenceUnavailable');
 echo "[*] Connected to WhatsApp\n\n";
 
 //update your profile picture
-// $w->sendSetProfilePicture('demo/venom.jpg');
-
-//send simple message
-//$w->sendMessage($target, 'Hello world from Chat-Api!');
+$w->sendSetProfilePicture('demo/venom.jpg');
 
 //send picture
-// $w->sendMessageImage($target, 'demo/x3.jpg');
+$w->sendMessageImage($target, 'demo/x3.jpg');
 
 //send video
 //$w->sendMessageVideo($target, 'http://techslides.com/demos/sample-videos/small.mp4');
@@ -99,8 +96,8 @@ echo "[*] Connected to WhatsApp\n\n";
 //$w->sendMessageLocation($target, '4.948568', '52.352957');
 
 // Implemented out queue messages and auto msgid
-// $w->sendMessage($target, 'Guess the number :)');
-// $w->sendMessage($target, 'Sent from WhatsApi at '.date('H:i'));
+$w->sendMessage($target, 'Guess the number :)');
+$w->sendMessage($target, 'Sent from WhatsApi at '.date('H:i'));
 
 while ($w->pollMessage());
 
@@ -112,38 +109,38 @@ while ($w->pollMessage());
 $pn = new ProcessNode($w, $target);
 $w->setNewMessageBind($pn);
 
-//echo "\n\nYou can also write and send messages to $target (interactive conversation)\n\n> ";
+echo "\n\nYou can also write and send messages to $target (interactive conversation)\n\n> ";
 
-while ($w->pollMessage()) {
+while (1) {
+    $w->pollMessage();
     $msgs = $w->getMessages();
     foreach ($msgs as $m) {
-
-        //echo "Mensaje de $contact <br> $message";
+        // process inbound messages
+        //print($m->NodeString("") . "\n");
+    }
+    $line = fgets_u(STDIN);
+    if ($line != '') {
+        if (strrchr($line, ' ')) {
+            $command = trim(strstr($line, ' ', true));
+        } else {
+            $command = $line;
+        }
+        //available commands in the interactive conversation [/lastseen, /query]
+        switch ($command) {
+            case '/query':
+                $dst = trim(strstr($line, ' ', false));
+                echo "[] Interactive conversation with $target:\n";
+                break;
+            case '/lastseen':
+                echo '[] last seen: ';
+                $w->sendPresenceSubscription($target);
+                break;
+            default:
+                $w->sendMessage($target, $line);
+                break;
+        }
     }
 }
-//     $line = fgets_u(STDIN);
-//     if ($line != '') {
-//         if (strrchr($line, ' ')) {
-//             $command = trim(strstr($line, ' ', true));
-//         } else {
-//             $command = $line;
-//         }
-//         //available commands in the interactive conversation [/lastseen, /query]
-//         switch ($command) {
-//             case '/query':
-//                 $dst = trim(strstr($line, ' ', false));
-//                 echo "[] Interactive conversation with $target:\n";
-//                 break;
-//             case '/lastseen':
-//                 echo '[] last seen: ';
-//                 $w->sendPresenceSubscription($target);
-//                 break;
-//             default:
-//                 $w->sendMessage($target, $line);
-//                 break;
-//         }
-//     }
-// }
 
 /**
  * Demo class to show how you can process inbound messages.

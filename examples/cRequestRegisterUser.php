@@ -3,7 +3,7 @@ require_once '../src/Registration.php';
 // var_dump($_POST);
 $phone = $_POST['phone'];
 $username="521$phone";
-$debug = false;
+$debug = true;
 $identityExists = file_exists("../src/wadata/id.$username.dat");
 $w = new Registration($username, $debug);
 if (!$identityExists) {

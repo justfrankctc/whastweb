@@ -1,8 +1,8 @@
 <?php
 	$pagTitle = "Iniciar una conversación"; 
 	include_once 'header.php';
-	// $user = "5215585296369";
-	// $pass = "";
+	$user = "5215585296369";
+	$pass = "";
 ?>
 <div class="heading">Introduce el número (10 dígitos) del contacto con el que quieres comunicarte.</div>
 <form id="conversation" action="cBeginConversation.php" method="post">

@@ -4,7 +4,7 @@ require_once '../src/Registration.php';
 // $code = '332118';
 $username = $_POST['user'];
 $code = $_POST['code'];
-$debug=false;
+$debug=true;
 $w = new Registration($username, $debug);
 // var_dump($_POST);
 // echo "<div class='dataOutput'>Número usuario es: $username</div>";
@@ -21,7 +21,7 @@ try {
         include_once 'bSendToken.php';
     } catch (Exception $e) {
         $e = $e->getMessage();
-        echo "<div class='alert'>Algo salió mal:  $e</div>";
+        echo "<div class='alert'>$e</div>";
         // echo $e->getMessage()."\n";
         // exit(0);
         include_once 'bSendToken.php';
