@@ -55,11 +55,11 @@ $config['webpassword'] = 'qwerty12345';
 //    'email' => 'testemail@gmail.com',
 //    'emailPassword' => 'gmailpassword'
 //);
-$pass = "6R44JvLvgPyoSNJlHHS64edv1Z4=";
-$config['Frank'] = array(
-'fromNumber' => '5215525611806',
-'nick' => "Just Frank",
-'waPassword' => "6R44JvLvgPyoSNJlHHS64edv1Z4=",
+// $pass = "6R44JvLvgPyoSNJlHHS64edv1Z4=";
+$config['Pruebas'] = array(
+'fromNumber' => '5215585296369',
+'nick' => "Total Play",
+'waPassword' => "xJyTr/9j6DVAqaH40L5UowkoLro=",
 );
 
 

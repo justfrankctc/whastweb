@@ -12,6 +12,7 @@
 	margin-top: 10px; 
 	font-size: 30px;
 	text-align: center;
+	border-radius: 5px;
 }
 .dataOutput{
 	margin-top: 10px; 
@@ -57,6 +58,15 @@
 	font-size: 15px;
 	text-align: left;
 	padding-left:10px; 
+}
+
+.messageInput{
+	border-radius: 5px;
+	font-size: 30px;
+	text-align: left;
+	padding-left:10px; 
+	width: 800px;
+	height: 100px;
 }
 .hostMessage{
 	margin: 0 5px; 

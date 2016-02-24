@@ -3,15 +3,13 @@ require_once '../src/Registration.php';
 // var_dump($_POST);
 $phone = $_POST['phone'];
 $username="521$phone";
+$option = $_POST['autenType'];
 $debug = true;
 $identityExists = file_exists("../src/wadata/id.$username.dat");
 $w = new Registration($username, $debug);
 if (!$identityExists) {
-    // echo "\n\nType sms or voice: ";
-    // $option = fgets(STDIN);
-    //$option->codeRequest();
     try {
-        $w->codeRequest();
+        $w->codeRequest($option);
          include_once 'bSendToken.php';
     } catch (Exception $e) {
         $e = $e->getMessage();
@@ -19,7 +17,6 @@ if (!$identityExists) {
         echo "<div class='alert'>Algo salió mal:  $e</div>";
         include_once 'bRequestRegisterUser.php';
     }
-    
 } else {
     try {
         $result = $w->checkCredentials();
@@ -35,6 +32,3 @@ if (!$identityExists) {
 /*
 */                        
 ?>
-   
-
-                

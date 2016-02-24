@@ -16,30 +16,30 @@ echo "====================================\n";
 
 ////////////////CONFIGURATION///////////////////////
 ////////////////////////////////////////////////////
-$username = '5215525611806';
-$password = '6R44JvLvgPyoSNJlHHS64edv1Z4=';
-$nickname = 'Web Frank';
-$debug = false;
+$username = '5215585296369';
+$password = 'xJyTr/9j6DVAqaH40L5UowkoLro==';
+$nickname = 'Total Play';
+$debug = true;
 /////////////////////////////////////////////////////
-if ($_SERVER['argv'][1] == null) {
-    echo 'USAGE: php '.$_SERVER['argv'][0]." <number> \n\nEj: php client.php 34123456789\n\n";
-    exit(1);
-}
-$target = $_SERVER['argv'][1];
-function fgets_u($pStdn)
-{
-    $pArr = [$pStdn];
+// if ($_SERVER['argv'][1] == null) {
+//     echo 'USAGE: php '.$_SERVER['argv'][0]." <number> \n\nEj: php client.php 34123456789\n\n";
+//     exit(1);
+// }
+$target = "5215525611806";
+// function fgets_u($pStdn)
+// {
+//     $pArr = [$pStdn];
 
-    if (false === ($num_changed_streams = stream_select($pArr, $write = null, $except = null, 0))) {
-        echo "\$ 001 Socket Error : UNABLE TO WATCH STDIN.\n";
+//     if (false === ($num_changed_streams = stream_select($pArr, $write = null, $except = null, 0))) {
+//         echo "\$ 001 Socket Error : UNABLE TO WATCH STDIN.\n";
 
-        return false;
-    } elseif ($num_changed_streams > 0) {
-        return trim(fgets($pStdn, 1024));
-    }
+//         return false;
+//     } elseif ($num_changed_streams > 0) {
+//         return trim(fgets($pStdn, 1024));
+//     }
 
-    return;
-}
+//     return;
+// }
 
 function onPresenceAvailable($username, $from)
 {
@@ -72,36 +72,36 @@ $w->sendPresenceSubscription($target); // Nos suscribimos a la presencia del usu
 $pn = new ProcessNode($w, $target);
 $w->setNewMessageBind($pn);
 
-while (1) {
-    $w->pollMessage();
-    $msgs = $w->getMessages();
-    foreach ($msgs as $m) {
-        // process inbound messages
-        //print($m->NodeString("") . "\n");
-        var_dump($m);
-    }
-    $line = fgets_u(STDIN);
-    if ($line != '') {
-        if (strrchr($line, ' ')) {
-            $command = trim(strstr($line, ' ', true));
-        } else {
-            $command = $line;
-        }
-        switch ($command) {
-            case '/query':
-                $dst = trim(strstr($line, ' ', false));
-                echo "[] Interactive conversation with $contact:\n";
-                break;
-            case '/lastseen':
-                echo "[] Last seen $target: ";
-                $w->sendGetRequestLastSeen($target);
-                break;
-            default:
-                $w->sendMessage($target, $line);
-                break;
-        }
-    }
-}
+// while (1) {
+//     $w->pollMessage();
+//     $msgs = $w->getMessages();
+//     foreach ($msgs as $m) {
+//         // process inbound messages
+//         //print($m->NodeString("") . "\n");
+//         var_dump($m);
+//     }
+//     $line = fgets_u(STDIN);
+//     if ($line != '') {
+//         if (strrchr($line, ' ')) {
+//             $command = trim(strstr($line, ' ', true));
+//         } else {
+//             $command = $line;
+//         }
+//         switch ($command) {
+//             case '/query':
+//                 $dst = trim(strstr($line, ' ', false));
+//                 echo "[] Interactive conversation with $contact:\n";
+//                 break;
+//             case '/lastseen':
+//                 echo "[] Last seen $target: ";
+//                 $w->sendGetRequestLastSeen($target);
+//                 break;
+//             default:
+//                 $w->sendMessage($target, $line);
+//                 break;
+//         }
+//     }
+// }
 
 class ProcessNode
 {
