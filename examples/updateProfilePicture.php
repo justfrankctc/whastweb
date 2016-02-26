@@ -1,14 +1,9 @@
 <?php
-    $message = $_GET['message'];
-    // $message = "This is a test!";
-    $username = "5215585296369";
+	$username = "5215585296369";
     $password = "xJyTr/9j6DVAqaH40L5UowkoLro=";
-    $contact = $_GET['target'];
-    $target = "521$contact";
-    // $target = "5215525611806";
     $nickname = 'Total Play';
-    $debug = false;
-
+    $picture = 'TOTALPLAY2.jpg';
+    $debug = false; 
 
     set_time_limit(10);
     require_once __DIR__.'/../src/whatsprot.class.php';
@@ -18,19 +13,19 @@
     date_default_timezone_set('America/Mexico_City');
 
     //This function only needed to show how eventmanager works.
-    function onGetProfilePicture($from, $target, $type, $data){
-        if ($type == 'preview') {
-            $filename = 'preview_'.$target.'.jpg';
-        } else {
-            $filename = $target.'.jpg';
-        }
+    // function onGetProfilePicture($from, $target, $type, $data){
+    //     if ($type == 'preview') {
+    //         $filename = 'preview_'.$target.'.jpg';
+    //     } else {
+    //         $filename = $target.'.jpg';
+    //     }
 
-        $filename = Constants::PICTURES_FOLDER.'/'.$filename;
+    //     $filename = Constants::PICTURES_FOLDER.'/'.$filename;
 
-        file_put_contents($filename, $data);
+    //     file_put_contents($filename, $data);
 
-        echo '- Profile picture saved in '.Constants::PICTURES_FOLDER.'/'.$filename."\n";
-    }
+    //     echo '- Profile picture saved in '.Constants::PICTURES_FOLDER.'/'.$filename."\n";
+    // }
 
     function onPresenceAvailable($username, $from){
         $dFrom = str_replace(['@s.whatsapp.net', '@g.us'], '', $from);
@@ -53,8 +48,8 @@
 
         // Retrieve large profile picture. Output is in /src/php/pictures/ (you need to bind a function
         // to the event onProfilePicture so the script knows what to do.
-        $w->eventManager()->bind('onGetProfilePicture', 'onGetProfilePicture');
-        $w->sendGetProfilePicture($target, true);
+        // $w->eventManager()->bind('onGetProfilePicture', 'onGetProfilePicture');
+        // $w->sendGetProfilePicture($target, true);
 
         //Print when the user goes online/offline (you need to bind a function to the event onPressence
         //so the script knows what to do)
@@ -66,39 +61,8 @@
     } catch (Exception $e) {
         // echo "<br/><div class='alert'>LoginWithPassword fail: $e</div>";
     }
-
-    // Implemented out queue messages and auto msgid
-    // $w->sendMessage($target, $message);
-    try {
-        //send message
-        $w->sendMessage($target, $message);
-        $messageSent = $message;
-        // echo "<br/><div class='dataOutput'>Message sent successfully!</div>";
-        // echo "<br/><div class=''>Target: $target</div>";
-        // echo "<br/><div class=''>Message: $message</div>";
-    } catch (Exception $e) {
-        // echo "<br/><div class='alert'>Send message fail: $e</div>";
-    }
-    // $w->sendMessage($target, 'Sent from WhatsApi at '.date('H:i'));
-
-    while ($w->pollMessage());
-
-    $pn = new ProcessNode($w, $target);
-    $w->setNewMessageBind($pn);
-
-    class ProcessNode
-    {
-        protected $wp = false;
-        protected $target = false;
-
-        public function __construct($wp, $target)
-        {
-            $this->wp = $wp;
-            $this->target = $target;
-        }
-
-        
-    }
-    $w->disconnect();
-    include_once 'bSendMessage.php';
+	//update your profile picture
+	// $w->sendSetProfilePicture('TOTALPLAY.jpg');
+    $w->sendSetProfilePicture($picture);
+	// $w->disconnect();
 ?>

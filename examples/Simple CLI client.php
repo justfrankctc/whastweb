@@ -1,45 +1,18 @@
 <?php
-/*************************************
- * Autor: mgp25                      *
- * Github: https://github.com/mgp25  *
- *************************************/
-require_once '../src/whatsprot.class.php';
+set_time_limit(10);
+    require_once __DIR__.'/../src/whatsprot.class.php';
+    require_once __DIR__.'/../src//events/MyEvents.php';
+
 //Change the time zone if you are in a different country
 date_default_timezone_set('America/Mexico_City');
 
-echo "####################################\n";
-echo "#                                  #\n";
-echo "#           WA CLI CLIENT          #\n";
-echo "#                                  #\n";
-echo "####################################\n\n";
-echo "====================================\n";
-
 ////////////////CONFIGURATION///////////////////////
 ////////////////////////////////////////////////////
-$username = '5215585296369';
-$password = 'xJyTr/9j6DVAqaH40L5UowkoLro==';
+$username = "5215585296369";
+$password = "xJyTr/9j6DVAqaH40L5UowkoLro=";
 $nickname = 'Total Play';
-$debug = true;
-/////////////////////////////////////////////////////
-// if ($_SERVER['argv'][1] == null) {
-//     echo 'USAGE: php '.$_SERVER['argv'][0]." <number> \n\nEj: php client.php 34123456789\n\n";
-//     exit(1);
-// }
+$debug = false;
 $target = "5215525611806";
-// function fgets_u($pStdn)
-// {
-//     $pArr = [$pStdn];
-
-//     if (false === ($num_changed_streams = stream_select($pArr, $write = null, $except = null, 0))) {
-//         echo "\$ 001 Socket Error : UNABLE TO WATCH STDIN.\n";
-
-//         return false;
-//     } elseif ($num_changed_streams > 0) {
-//         return trim(fgets($pStdn, 1024));
-//     }
-
-//     return;
-// }
 
 function onPresenceAvailable($username, $from)
 {
@@ -53,7 +26,7 @@ function onPresenceUnavailable($username, $from, $last)
     echo "<$dFrom is offline>\n\n";
 }
 
-echo "[] logging in as '$nickname' ($username)\n";
+echo "<br/><div class='dataOutput'>[] Logging in as '$nickname' ($username)</div>\n";
 $w = new WhatsProt($username, $nickname, $debug);
 
 $w->eventManager()->bind('onPresenceAvailable', 'onPresenceAvailable');
@@ -73,34 +46,14 @@ $pn = new ProcessNode($w, $target);
 $w->setNewMessageBind($pn);
 
 // while (1) {
-//     $w->pollMessage();
-//     $msgs = $w->getMessages();
-//     foreach ($msgs as $m) {
-//         // process inbound messages
-//         //print($m->NodeString("") . "\n");
-//         var_dump($m);
-//     }
-//     $line = fgets_u(STDIN);
-//     if ($line != '') {
-//         if (strrchr($line, ' ')) {
-//             $command = trim(strstr($line, ' ', true));
-//         } else {
-//             $command = $line;
-//         }
-//         switch ($command) {
-//             case '/query':
-//                 $dst = trim(strstr($line, ' ', false));
-//                 echo "[] Interactive conversation with $contact:\n";
-//                 break;
-//             case '/lastseen':
-//                 echo "[] Last seen $target: ";
-//                 $w->sendGetRequestLastSeen($target);
-//                 break;
-//             default:
-//                 $w->sendMessage($target, $line);
-//                 break;
-//         }
-//     }
+    $w->pollMessage();
+    $msgs = $w->getMessages();
+    foreach ($msgs as $m) {
+        // process inbound messages
+        // echo $m->NodeString("")."<br/>";
+        echo "<hr/>";
+        var_dump($m);
+    }    
 // }
 
 class ProcessNode

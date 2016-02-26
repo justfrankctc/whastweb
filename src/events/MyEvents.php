@@ -35,7 +35,7 @@ class MyEvents extends AllEvents
 //        'onGetGroupsSubject',
 //        'onGetImage',
 //        'onGetLocation',
-//        'onGetMessage',
+       'onGetMessage',
 //        'onGetNormalizedJid',
 //        'onGetPrivacyBlockedList',
 //        'onGetProfilePicture',
@@ -94,5 +94,8 @@ class MyEvents extends AllEvents
 
     public function onMessageReceivedServer($target){
         echo "<p>  Yeah, you have a message from $target!</p>";
+    }
+    public function onGetMessage( $mynumber, $from, $id, $type, $time, $name, $body ){
+    echo "Message from $name:\n$body\n\n";
     }
 }

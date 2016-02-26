@@ -4,13 +4,12 @@ require_once '../src/Registration.php';
 $phone = $_POST['phone'];
 $username="521$phone";
 $option = $_POST['autenType'];
-$debug = true;
+$debug = false;
 $identityExists = file_exists("../src/wadata/id.$username.dat");
 $w = new Registration($username, $debug);
 if (!$identityExists) {
     try {
         $w->codeRequest($option);
-         include_once 'bSendToken.php';
     } catch (Exception $e) {
         $e = $e->getMessage();
         // exit(0);
@@ -28,7 +27,7 @@ if (!$identityExists) {
     }
 }
 // echo "<div class='dataOutput'>Su nombre de usuario es: $username</div>";
-// include_once 'bSendToken.php';
+include_once 'bSendToken.php';
 /*
 */                        
 ?>

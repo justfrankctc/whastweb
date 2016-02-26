@@ -4,7 +4,7 @@ require_once '../src/Registration.php';
 // $code = '332118';
 $username = $_POST['user'];
 $code = $_POST['code'];
-$debug=true;
+$debug=false;
 $w = new Registration($username, $debug);
 // var_dump($_POST);
 // echo "<div class='dataOutput'>Número usuario es: $username</div>";
@@ -16,7 +16,7 @@ try {
 		// $user = $username;
 		// $pass = $code;
 
-        echo "<div class='dataOutput'>Tu usuaro es: $user</div>";
+        // echo "<div class='dataOutput'>Tu usuaro es: $user</div>";
         echo "<div class='dataOutput'>Tu password es: $pass</div>";
         include_once 'bSendToken.php';
     } catch (Exception $e) {
