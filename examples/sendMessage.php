@@ -51,7 +51,7 @@
         // Now loginWithPassword function sends Nickname and (Available) Presence
         $w->loginWithPassword($password);
 
-     
+        
         //Print when the user goes online/offline (you need to bind a function to the event onPressence
         //so the script knows what to do)
         $w->eventManager()->bind('onPresenceAvailable', 'onPresenceAvailable');
@@ -77,24 +77,16 @@
     }
     // $w->sendMessage($target, 'Sent from WhatsApi at '.date('H:i'));
 
-    while ($w->pollMessage());
-
-    $pn = new ProcessNode($w, $target);
-    $w->setNewMessageBind($pn);
-
-    class ProcessNode
-    {
-        protected $wp = false;
-        protected $target = false;
-
-        public function __construct($wp, $target)
-        {
-            $this->wp = $wp;
-            $this->target = $target;
-        }
-
+    try {
         
+        while ($w->pollMessage());
+       
+        echo "<div class='outputInfo success'> El mensaje ha sido enviado </div>";
+        $w->disconnect();
+    } catch (Exception $e) {
+        echo "<div class='outputInfo alert'> $e </div>";            
     }
-    $w->disconnect();
+
+
    
 ?>
