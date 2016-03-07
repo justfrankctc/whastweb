@@ -1,0 +1,88 @@
+#container{
+	text-align: center;
+}
+#wrapper{
+	padding-top: 100px;
+}	
+.heading{
+	font-size: 22px;
+	color: blue;
+}
+.dataInput{
+	margin-top: 10px; 
+	font-size: 30px;
+	text-align: center;
+	border-radius: 5px;
+}
+.dataOutput{
+	margin-top: 10px; 
+	font-size: 25px;
+	text-align: center;
+	color: green;
+}
+.panel{
+	padding: 0px 350px;
+}
+.box{
+	width: 800px;
+	height: 500px;
+}
+.header{
+	margin-left: 15px;
+	border-radius: 5px;
+	font-size: 30px;
+	width: 800px;
+	text-align: center;
+}
+.converation{
+	background-color: #D1DBBD;
+	border-radius: 5px;
+}
+.messageItem{
+	width: 300px;
+	color: #f2f2f2;
+	border-radius: 500px;
+	margin-left: 20px;
+}
+.host{
+	text-align: right;
+	background-color: #96bf48;
+	margin-left: 470px; 
+}
+.client{
+	text-align: left;
+	background-color: #479ccf;
+}
+.message{
+	border-radius: 5px;
+	font-size: 15px;
+	text-align: left;
+	padding-left:10px; 
+}
+
+.messageInput{
+	border-radius: 5px;
+	font-size: 30px;
+	text-align: left;
+	padding-left:10px; 
+	width: 800px;
+	height: 100px;
+}
+.hostMessage{
+	margin: 0 5px; 
+}
+.clientMessage{
+	margin-left: 5px; 
+}
+.buttonCont{
+	padding-top: 10%;
+	padding-left: 70%;
+}
+.send{
+	width: 150px;
+}
+.alert{
+	color: red;
+}
+
+
